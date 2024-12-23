@@ -6,5 +6,10 @@
   "address": {
     "city": "New York",
     "zipCode": "10001"
+  },
+  "hobbies4": ["Reading", "Swimming"],
+  "address4": {
+    "city": "New York",
+    "zipCode": "10001"
   }
 }
