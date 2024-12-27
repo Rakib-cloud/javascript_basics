@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Showcase</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<!-- Header Section -->
+<header class="bg-gray-800 text-white p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-2xl font-bold">Product Showcase</h1>
+        <div id="profile-section" class="text-right">
+            <!-- User Details or Login Button -->
+            <div id="auth-section" class="space-y-1">
+                <!-- Populated dynamically by script.js -->
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content Section -->
+<main class="py-8">
+    <div class="container mx-auto px-4">
+        <!-- Products Section -->
+        <section id="products">
+            <h2 class="text-xl font-semibold mb-4">Featured Products</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="featured-products"></div>
+
+            <h2 class="text-xl font-semibold mt-12 mb-4">Discount Products</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="discount-products"></div>
+
+            <h2 class="text-xl font-semibold mt-12 mb-4">New Products</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="new-products"></div>
+
+            <h2 class="text-xl font-semibold mt-12 mb-4">Top Products</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="top-products"></div>
+        </section>
+
+        <!-- Top Brands Section -->
+        <section id="top-brands" class="mt-12">
+            <h2 class="text-xl font-semibold mb-4">Top Brands</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-white p-4 rounded-lg shadow-lg text-center">
+                    <img src="https://via.placeholder.com/50" alt="Brand 1" class="mx-auto h-24 w-24 object-contain mb-4">
+                    <h3 class="text-lg font-medium">Brand 1</h3>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-lg text-center">
+                    <img src="https://via.placeholder.com/50" alt="Brand 2" class="mx-auto h-24 w-24 object-contain mb-4">
+                    <h3 class="text-lg font-medium">Brand 2</h3>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-lg text-center">
+                    <img src="https://via.placeholder.com/50" alt="Brand 3" class="mx-auto h-24 w-24 object-contain mb-4">
+                    <h3 class="text-lg font-medium">Brand 3</h3>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-lg text-center">
+                    <img src="https://via.placeholder.com/50" alt="Brand 4" class="mx-auto h-24 w-24 object-contain mb-4">
+                    <h3 class="text-lg font-medium">Brand 4</h3>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- Footer Section -->
+<footer class="bg-gray-800 text-white p-4">
+    <div class="container mx-auto text-center">
+        <p>&copy; 2024 Product Showcase. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="products.js"></script>
+
+
+<script>
+    const authSection = document.getElementById('auth-section');
+    const user = JSON.parse(localStorage.getItem('loggedInUser'));
+
+    if (user) {
+        // Show user details and Logout button
+        authSection.innerHTML = `
+            <p id="profile-name">Name: ${user.name}</p>
+            <p id="profile-mobile">Mobile: ${user.mobile}</p>
+            <button id="logout-btn" class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 mt-2">
+                Logout
+            </button>
+        `;
+
+        // Logout functionality
+        document.getElementById('logout-btn').addEventListener('click', function () {
+            localStorage.removeItem('loggedInUser');
+            alert('You have logged out successfully.');
+            window.location.href = 'login.html';
+        });
+    } else {
+        // Show Login button
+        authSection.innerHTML = `
+            <button id="login-btn" class="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600">
+                Login
+            </button>
+        `;
+
+        // Redirect to Login page
+        document.getElementById('login-btn').addEventListener('click', function () {
+            window.location.href = 'login.html';
+        });
+    }
+</script>
+</body>
+</html>

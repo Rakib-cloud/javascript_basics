@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+
+<!-- Login Form -->
+<div class="bg-white p-8 rounded-lg shadow-lg w-96">
+    <h1 class="text-2xl font-bold mb-4 text-center">Login</h1>
+    <form id="loginForm">
+        <div class="mb-4">
+            <label for="mobile" class="block text-sm font-medium">Mobile</label>
+            <input type="text" id="mobile" class="w-full border border-gray-300 rounded-md p-2" required>
+        </div>
+        <div class="mb-4">
+            <label for="password" class="block text-sm font-medium">Password</label>
+            <input type="password" id="password" class="w-full border border-gray-300 rounded-md p-2" required>
+        </div>
+        <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Login</button>
+    </form>
+    <p class="text-sm mt-4 text-center">Don't have an account? <a href="register.html" class="text-blue-500">Register</a></p>
+    <p class="text-sm mt-4 text-center"> <a href="products.html" class="text-green-500">GO Back to Home</a></p>
+</div>
+
+<script src="auth.js"></script>
+</body>
+</html>
