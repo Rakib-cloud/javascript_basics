@@ -48,9 +48,10 @@ function showProducts() {
     });
 }
 
+
 function createProductElement(product) {
     const productItem = document.createElement('div');
-    productItem.classList.add('bg-white', 'p-6', 'rounded-lg', 'shadow-lg', 'text-center');
+    productItem.classList.add('bg-green-500', 'p-6', 'rounded-lg', 'shadow-lg', 'text-center');
 
     productItem.innerHTML = `
         <img src="${product.image}" alt="${product.name}" class="mx-auto h-48 w-48 object-contain mb-4">
