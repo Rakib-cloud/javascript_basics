@@ -1,0 +1,18 @@
+1.Your first E-commerce Project.
+  i.Add registration and signup functionality.
+  ii.Show some products.
+  iii.Add to cart button shows in product card .(Product cart button shows in hover).
+  iv.After add to cart store cart data into localStorage .
+  v.Make a profile page when i click name go to profile page.
+  vi.show profile information and cart products lists .
+
+  Note : You can use any kinds of design but make sure make it own.You can see demo from other site.
+
+
+  2.Make your own money bag.
+    i.Take a input as income.
+    ii.Take input for your food cost,Rent cost,Cloths cost.
+    iii.When click calculate button make a calculation show your income amount,expense amount and remaining amount.
+    iv.Now make a save input where you get value as percentage way like 10% .
+    v.After click save button now calculate how much you saving amount  based on your remaining amount.
+    vi.Show also your remaining amount now.
