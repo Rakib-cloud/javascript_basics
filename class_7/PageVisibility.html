@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Visibility Events</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const output = document.getElementById("output");
+
+            // Detect visibility change
+            document.addEventListener("visibilitychange", () => {
+                if (document.hidden) {
+                    output.textContent = "Page is now hidden";
+                } else {
+                    output.textContent = "Page is now visible";
+                }
+            });
+
+            // Detect page focus and blur events
+            window.addEventListener("focus", () => {
+                output.textContent = "Page has gained focus";
+            });
+
+            window.addEventListener("blur", () => {
+                output.textContent = "Page has lost focus";
+            });
+        });
+    </script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center space-y-6">
+<h1 class="text-2xl font-bold">Page Visibility Events Example</h1>
+<p class="text-gray-600">Minimize or switch tabs to see page visibility events in action.</p>
+
+<!-- Output Box -->
+<div id="output" class="w-full max-w-lg bg-white p-4 rounded shadow border text-gray-800 text-center">
+    Page visibility events will be logged here.
+</div>
+</body>
+</html>

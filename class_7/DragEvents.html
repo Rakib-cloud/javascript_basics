@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop Events</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const draggable = document.getElementById("draggable");
+            const dropZone = document.getElementById("dropZone");
+            const output = document.getElementById("output");
+
+            draggable.addEventListener("dragstart", (event) => {
+                output.textContent = "Drag started!";
+                event.dataTransfer.setData("text/plain", event.target.id);
+            });
+
+            draggable.addEventListener("drag", () => {
+                output.textContent = "Dragging...";
+            });
+
+            draggable.addEventListener("dragend", () => {
+                output.textContent = "Drag ended!";
+            });
+
+            dropZone.addEventListener("dragenter", () => {
+                dropZone.classList.add("bg-blue-100");
+                output.textContent = "Dragged over drop zone!";
+            });
+
+            dropZone.addEventListener("dragleave", () => {
+                dropZone.classList.remove("bg-blue-100");
+                output.textContent = "Left drop zone!";
+            });
+
+            dropZone.addEventListener("dragover", (event) => {
+                event.preventDefault(); // Necessary to allow dropping
+                output.textContent = "Dragging over drop zone!";
+            });
+
+            dropZone.addEventListener("drop", (event) => {
+                event.preventDefault();
+                const data = event.dataTransfer.getData("text/plain");
+                const draggedElement = document.getElementById(data);
+                dropZone.appendChild(draggedElement);
+                dropZone.classList.remove("bg-blue-100");
+                output.textContent = "Dropped!";
+            });
+        });
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<div class="space-y-4 text-center">
+    <h1 class="text-2xl font-bold">Drag and Drop Events</h1>
+    <div class="flex items-center justify-center space-x-4">
+        <!-- Draggable Item -->
+        <div id="draggable" draggable="true" class="w-24 h-24 bg-indigo-500 text-white flex items-center justify-center rounded-lg shadow-md hover:bg-indigo-600 cursor-pointer">
+            Drag Me
+        </div>
+
+        <!-- Drop Zone -->
+        <div id="dropZone" class="w-48 h-48 bg-gray-300 rounded-lg flex items-center justify-center text-gray-700 border-dashed border-2 border-gray-500">
+            Drop Here
+        </div>
+    </div>
+
+    <!-- Output -->
+    <div id="output" class="mt-4 p-2 bg-gray-50 border rounded-md text-gray-700 text-sm">
+        Perform drag and drop to see events here.
+    </div>
+</div>
+</body>
+</html>

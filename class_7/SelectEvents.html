@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selection Events</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const textInput = document.getElementById("textInput");
+            const output = document.getElementById("output");
+            const selectableText = document.getElementById("selectableText");
+
+            // Triggered when text in the input field is selected
+            textInput.addEventListener("select", (event) => {
+                const selectedText = textInput.value.substring(
+                    textInput.selectionStart,
+                    textInput.selectionEnd
+                );
+                output.textContent = `Text selected in input: "${selectedText}"`;
+            });
+
+            // Triggered whenever the selection changes on the document
+            document.addEventListener("selectionchange", () => {
+                const selection = window.getSelection();
+                if (selection && selection.toString()) {
+                    output.textContent = `Text selected in document: "${selection.toString()}"`;
+                }
+            });
+        });
+    </script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center space-y-6">
+<h1 class="text-2xl font-bold">Selection Events Example</h1>
+<p class="text-gray-600">Try selecting text in the input box or in the paragraph below!</p>
+
+<!-- Input Field -->
+<div class="w-full max-w-lg">
+    <label for="textInput" class="block text-lg font-medium text-gray-700">Text Input:</label>
+    <input
+            id="textInput"
+            type="text"
+            value="Select some text in this input box."
+            class="w-full border border-gray-300 rounded px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+    />
+</div>
+
+<!-- Selectable Paragraph -->
+<div id="selectableText" class="w-full max-w-lg p-4 bg-white border border-gray-300 rounded shadow">
+    Select some text in this paragraph to trigger the <strong>selectionchange</strong> event.
+    You can also select text anywhere on the document to see the event in action.
+</div>
+
+<!-- Output Box -->
+<div id="output" class="w-full max-w-lg bg-white p-4 rounded shadow border text-gray-800 text-center">
+    Event details will be logged here.
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Events</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const video = document.getElementById("video");
+            const output = document.getElementById("output");
+
+            const logEvent = (event) => {
+                output.textContent = `Event triggered: ${event.type}`;
+            };
+
+            // List of media events
+            const events = [
+                "play",
+                "pause",
+                "ended",
+                "loadeddata",
+                "canplay",
+                "canplaythrough",
+                "timeupdate",
+                "volumechange",
+                "seeked",
+                "seeking",
+                "waiting",
+                "error",
+                "stalled",
+                "suspend"
+            ];
+
+            events.forEach((event) => {
+                video.addEventListener(event, logEvent);
+            });
+        });
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center space-y-6">
+<h1 class="text-2xl font-bold">Media Events Example</h1>
+<p class="text-gray-600">Interact with the video to trigger different media events.</p>
+
+<!-- Video Player -->
+<div class="w-full max-w-xl">
+    <video id="video" controls class="w-full rounded shadow-lg">
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<!-- Output Box -->
+<div id="output" class="w-full max-w-xl bg-white p-4 rounded shadow border text-gray-800 text-center">
+    Events will be logged here.
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>All Keyboard Events</title>
+    <script>
+        document.addEventListener("keydown", () => {
+            document.getElementById("keydown").textContent = "Key is being pressed.";
+        });
+
+        document.addEventListener("keyup", () => {
+            document.getElementById("keyup").textContent = "Key is released.";
+        });
+
+        document.addEventListener("keypress", (event) => {
+            document.getElementById("keypress").textContent = `Keypress: ${event.key}`;
+        });
+    </script>
+</head>
+<body class="flex items-center justify-center h-screen bg-green-50">
+<div class="space-y-4 text-center">
+    <h1 class="text-2xl font-semibold">Keyboard Events</h1>
+    <p id="keydown" class="text-lg text-gray-600">Press a key...</p>
+    <p id="keyup" class="text-lg text-gray-600">Release a key...</p>
+    <p id="keypress" class="text-lg text-gray-600">Character pressed...</p>
+</div>
+</body>
+</html>

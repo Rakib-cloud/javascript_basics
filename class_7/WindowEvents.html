@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window Events</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const output = document.getElementById("output");
+
+            // Resize Event
+            window.addEventListener("resize", () => {
+                output.textContent = `Window resized to ${window.innerWidth} x ${window.innerHeight}`;
+            });
+
+            // Scroll Event
+            window.addEventListener("scroll", () => {
+                output.textContent = `Page scrolled. Scroll position: ${window.scrollY}`;
+            });
+
+            // Load Event
+            window.addEventListener("load", () => {
+                output.textContent = "Page fully loaded.";
+            });
+
+            // Unload Event
+            window.addEventListener("beforeunload", (event) => {
+                event.preventDefault();
+                event.returnValue = "Are you sure you want to leave?";
+                return "Are you sure you want to leave?";
+            });
+
+            // Focus Event
+            window.addEventListener("focus", () => {
+                output.textContent = "Window is in focus.";
+            });
+
+            // Blur Event
+            window.addEventListener("blur", () => {
+                output.textContent = "Window lost focus.";
+            });
+
+            // Online/Offline Events
+            window.addEventListener("online", () => {
+                output.textContent = "You are online.";
+            });
+
+            window.addEventListener("offline", () => {
+                output.textContent = "You are offline.";
+            });
+
+            // Keydown Event
+            window.addEventListener("keydown", (event) => {
+                output.textContent = `Key pressed: ${event.key}`;
+            });
+        });
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+<div class="flex flex-col items-center justify-center space-y-6 pt-12">
+    <h1 class="text-2xl font-bold">Window Events Example</h1>
+    <p class="text-gray-600">Try resizing, scrolling, switching tabs, or going online/offline to see window events in action!</p>
+
+    <!-- Output Box -->
+    <div id="output" class="w-full max-w-2xl bg-white p-4 rounded shadow border text-gray-800 text-center">
+        Interact with the window to see events here.
+    </div>
+
+    <!-- Scrollable Content to Trigger Scroll Event -->
+    <div class="h-64 w-full bg-gray-200 rounded-md shadow-inner overflow-y-auto">
+        <div class="h-96 bg-gradient-to-b from-indigo-400 to-indigo-700 flex items-center justify-center text-white font-bold">
+            Scroll me to trigger a scroll event!
+        </div>
+    </div>
+</div>
+</body>
+</html>
