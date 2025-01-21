@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Operations with Modal and Table</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans flex justify-center items-center min-h-screen p-5">
+
+<div class="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+    <h1 class="text-2xl font-semibold text-center mb-8">CRUD Operations with Modal and Table</h1>
+
+    <!-- Create Button -->
+    <div class="text-center mb-6">
+        <button onclick="openModal('create')" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition">Create Post</button>
+    </div>
+
+    <!-- Table -->
+    <table class="min-w-full table-auto bg-gray-50 border-collapse shadow-md rounded-lg">
+        <thead class="bg-gray-200">
+        <tr>
+            <th class="px-4 py-2 text-left">ID</th>
+            <th class="px-4 py-2 text-left">Title</th>
+            <th class="px-4 py-2 text-left">Body</th>
+            <th class="px-4 py-2 text-left">Actions</th>
+        </tr>
+        </thead>
+        <tbody id="postsTable">
+        <!-- Posts will be inserted here -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center hidden">
+    <div class="bg-white w-96 p-6 rounded-lg shadow-lg">
+        <h2 class="text-xl font-semibold mb-4" id="modalTitle">Create Post</h2>
+        <form id="postForm">
+            <div class="mb-4">
+                <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+                <input type="text" id="title" name="title" class="w-full px-3 py-2 border border-gray-300 rounded-lg" required>
+            </div>
+            <div class="mb-4">
+                <label for="body" class="block text-sm font-medium text-gray-700">Body</label>
+                <textarea id="body" name="body" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg" required></textarea>
+            </div>
+            <div class="text-right">
+                <button type="button" onclick="closeModal()" class="bg-gray-500 text-white py-2 px-4 rounded mr-2">Cancel</button>
+                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+    let currentEditPostId = null;
+
+    // Function to open modal for create or edit
+    function openModal(action, postId = null) {
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modalTitle');
+        const form = document.getElementById('postForm');
+        const titleField = document.getElementById('title');
+        const bodyField = document.getElementById('body');
+
+        if (action === 'create') {
+            modalTitle.innerText = 'Create Post';
+            titleField.value = '';
+            bodyField.value = '';
+            currentEditPostId = null;
+        } else if (action === 'edit') {
+            modalTitle.innerText = 'Edit Post';
+            // Fetch post data and populate the form fields
+            fetch(`${apiUrl}/${postId}`)
+                .then(response => response.json())
+                .then(post => {
+                    titleField.value = post.title;
+                    bodyField.value = post.body;
+                    currentEditPostId = postId;
+                });
+        }
+
+        modal.classList.remove('hidden');
+    }
+
+    // Function to close the modal
+    function closeModal() {
+        document.getElementById('modal').classList.add('hidden');
+    }
+
+    // Function to fetch posts and render them in the table
+    function fetchPosts() {
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(posts => {
+                const tableBody = document.getElementById('postsTable');
+                tableBody.innerHTML = ''; // Clear the table
+                posts.forEach(post => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+              <td class="px-4 py-2">${post.id}</td>
+              <td class="px-4 py-2">${post.title}</td>
+              <td class="px-4 py-2">${post.body}</td>
+              <td class="px-4 py-2">
+                <button onclick="openModal('edit', ${post.id})" class="bg-yellow-500 text-white py-1 px-3 rounded hover:bg-yellow-700 transition">Edit</button>
+                <button onclick="deletePost(${post.id})" class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-700 transition ml-2">Delete</button>
+              </td>
+            `;
+                    tableBody.appendChild(row);
+                });
+            });
+    }
+
+    // Function to create or update a post
+    function submitForm(event) {
+        event.preventDefault();
+        const title = document.getElementById('title').value;
+        const body = document.getElementById('body').value;
+
+        const postData = { title, body, userId: 1 };
+
+        if (currentEditPostId) {
+            // Update post
+            fetch(`${apiUrl}/${currentEditPostId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(postData),
+            })
+                .then(response => response.json())
+                .then(() => {
+                    fetchPosts(); // Refresh table after update
+                    closeModal();
+                });
+        } else {
+            // Create new post
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(postData),
+            })
+                .then(response => response.json())
+                .then(() => {
+                    fetchPosts(); // Refresh table after creation
+                    closeModal();
+                });
+        }
+    }
+
+    // Function to delete a post
+    function deletePost(postId) {
+        fetch(`${apiUrl}/${postId}`, { method: 'DELETE' })
+            .then(() => {
+                fetchPosts(); // Refresh table after deletion
+            });
+    }
+
+    // Initialize by fetching posts
+    fetchPosts();
+
+    // Attach form submit event
+    document.getElementById('postForm').addEventListener('submit', submitForm);
+</script>
+
+</body>
+</html>

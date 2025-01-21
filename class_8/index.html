@@ -1,0 +1,120 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Categories & Products</title>-->
+<!--    <script src="https://cdn.tailwindcss.com"></script>-->
+<!--</head>-->
+<!--<body class="bg-gray-100">-->
+<!--&lt;!&ndash; Navbar &ndash;&gt;-->
+<!--<nav class="bg-blue-600 text-white p-4">-->
+<!--    <div class="container mx-auto flex justify-between items-center">-->
+<!--        <div class="text-lg font-semibold">Medeasy</div>-->
+<!--        <div class="space-x-6 hidden md:flex">-->
+<!--            <a href="#" class="hover:text-gray-300">Home</a>-->
+<!--            <a href="#categories-container" class="hover:text-gray-300">Categories</a>-->
+<!--            <a href="#products-container" class="hover:text-gray-300">Products</a>-->
+<!--            <a href="#" class="hover:text-gray-300">Contact</a>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Hamburger for small screens &ndash;&gt;-->
+<!--        <div class="md:hidden">-->
+<!--            <button id="navbar-toggle" class="text-white">-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">-->
+<!--                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>-->
+<!--                </svg>-->
+<!--            </button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</nav>-->
+
+<!--&lt;!&ndash; Mobile Navbar (hidden by default) &ndash;&gt;-->
+<!--<div id="mobile-navbar" class="md:hidden bg-blue-600 text-white p-4 space-y-4 hidden">-->
+<!--    <a href="#categories-container" class="block">Categories</a>-->
+<!--    <a href="#products-container" class="block">Products</a>-->
+<!--    <a href="#" class="block">Contact</a>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Categories Section &ndash;&gt;-->
+<!--<section id="categories-container" class="container mx-auto py-10">-->
+<!--    <h2 class="text-3xl font-bold text-center mb-8">Categories</h2>-->
+<!--    <div id="category-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">-->
+<!--        &lt;!&ndash; Categories will be loaded here &ndash;&gt;-->
+<!--    </div>-->
+<!--</section>-->
+
+<!--&lt;!&ndash; Products Section &ndash;&gt;-->
+<!--<section id="products-container" class="container mx-auto py-10 bg-gray-50">-->
+<!--    <h2 class="text-3xl font-bold text-center mb-8">Products</h2>-->
+<!--    <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">-->
+<!--        &lt;!&ndash; Products will be loaded here &ndash;&gt;-->
+<!--    </div>-->
+<!--</section>-->
+
+<!--<script src="app.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories & Products</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Underline:ital,wght@0,100..900;1,100..900&family=Playwrite+VN:wght@100..400&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+
+<!-- Navbar -->
+<nav class="bg-blue-600 text-white p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <div class="text-lg font-semibold">Medeasy</div>
+        <div class="space-x-6 hidden md:flex">
+            <a href="#categories-container" class="hover:text-gray-300">Home</a>
+            <a href="#categories-container" class="hover:text-gray-300">Categories</a>
+            <a href="#products-container" class="hover:text-gray-300">Products</a>
+            <a href="#" class="hover:text-gray-300">Contact</a>
+        </div>
+        <!-- Hamburger for small screens -->
+        <div class="md:hidden">
+            <button id="navbar-toggle" class="text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                     class="h-6 w-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Navbar (hidden by default) -->
+<div id="mobile-navbar" class="md:hidden bg-blue-600 text-white p-4 space-y-4 hidden">
+    <a href="#categories-container" class="block">Categories</a>
+    <a href="#products-container" class="block">Products</a>
+    <a href="#" class="block">Contact</a>
+</div>
+
+<!-- Categories Section -->
+<section id="categories-container" class="container mx-auto py-10">
+    <h2 class="text-3xl font-bold text-center mb-8">Categories</h2>
+    <div id="category-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <!-- Categories will be loaded here -->
+    </div>
+</section>
+
+<!-- Products Section -->
+<section id="products-container" class="container mx-auto py-10 bg-gray-50">
+    <h2 class="text-3xl font-bold text-center mb-8">Products</h2>
+    <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Products will be loaded here -->
+    </div>
+</section>
+
+<script src="scripts.js"></script>
+</body>
+
+</html>

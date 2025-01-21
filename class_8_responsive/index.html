@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Webpage</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="brand">myLogo</div>
+    <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+    <div id="ham1" class="hamburger">&#9776;</div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div>
+        <h1 >Welcome to Our Store</h1>
+        <p>Find the best products tailored for you.</p>
+        <button>Shop Now</button>
+    </div>
+</section>
+
+<!-- Products Section -->
+<section class="products">
+    <div class="product">
+        <img src="https://via.placeholder.com/300" alt="Product 1">
+        <h3>Product 1</h3>
+        <p>$20.00</p>
+    </div>
+    <div class="product">
+        <img src="https://via.placeholder.com/300" alt="Product 2">
+        <h3>Product 2</h3>
+        <p>$25.00</p>
+    </div>
+    <div class="product">
+        <img src="https://via.placeholder.com/300" alt="Product 3">
+        <h3>Product 3</h3>
+        <p>$30.00</p>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-section">
+        <h4>About Us</h4>
+        <p>We provide the best products for our customers.</p>
+    </div>
+    <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <h4>Contact Us</h4>
+        <p>Email: support@example.com</p>
+        <p>Phone: +123456789</p>
+    </div>
+</footer>
+
+<script>
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+
+    hamburger.addEventListener('click', () => {
+        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    });
+</script>
+</body>
+</html>
