@@ -1,154 +1,15 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--  <meta charset="UTF-8">-->
-<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--  <title>B2B Client Management</title>-->
-<!--  <script src="https://cdn.tailwindcss.com"></script>-->
-<!--</head>-->
-<!--<body class="p-6 bg-gray-100">-->
-<!--<div class="container mx-auto">-->
-<!--  <div class="flex justify-between items-center mb-4">-->
-<!--    <h1 class="text-2xl font-bold">B2B Client Management</h1>-->
-<!--    <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="openModal('addModal')">Add Client</button>-->
-<!--  </div>-->
-
-<!--  <table class="w-full bg-white shadow-md rounded-md overflow-hidden">-->
-<!--    <thead class="bg-gray-200">-->
-<!--    <tr>-->
-<!--      <th class="py-2 px-4">#</th>-->
-<!--      <th class="py-2 px-4">Name</th>-->
-<!--      <th class="py-2 px-4">Phone</th>-->
-<!--      <th class="py-2 px-4">Address</th>-->
-<!--      <th class="py-2 px-4">Actions</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody id="clientTable"></tbody>-->
-<!--  </table>-->
-<!--</div>-->
-
-<!--&lt;!&ndash; Add/Edit Modal &ndash;&gt;-->
-<!--<div id="addModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">-->
-<!--  <div class="bg-white p-6 rounded-md shadow-md w-96">-->
-<!--    <h2 class="text-xl font-bold mb-4" id="modalTitle">Add Client</h2>-->
-<!--    <input type="hidden" id="clientId">-->
-<!--    <input type="text" id="name" placeholder="Name" class="w-full border p-2 rounded mb-2">-->
-<!--    <input type="text" id="phone" placeholder="Phone" class="w-full border p-2 rounded mb-2">-->
-<!--    <input type="text" id="address" placeholder="Address" class="w-full border p-2 rounded mb-2">-->
-<!--    <div class="flex justify-end">-->
-<!--      <button class="bg-gray-500 text-white px-4 py-2 rounded mr-2" onclick="closeModal('addModal')">Cancel</button>-->
-<!--      <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="submitClient()">Save</button>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-<!--&lt;!&ndash; Delete Confirmation Modal &ndash;&gt;-->
-<!--<div id="deleteModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">-->
-<!--  <div class="bg-white p-6 rounded-md shadow-md">-->
-<!--    <h2 class="text-xl font-bold mb-4">Are you sure you want to delete?</h2>-->
-<!--    <input type="hidden" id="deleteClientId">-->
-<!--    <div class="flex justify-end">-->
-<!--      <button class="bg-gray-500 text-white px-4 py-2 rounded mr-2" onclick="closeModal('deleteModal')">Cancel</button>-->
-<!--      <button class="bg-red-500 text-white px-4 py-2 rounded" onclick="deleteClient()">Delete</button>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-<!--<script>-->
-<!--  const baseURL = "https://dev-api.shukhee.com";-->
-<!--  const token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwic3ViIjoiYWRtaW5AZ21haWwuY29tIiwidHlwZSI6IkFkbWluIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzM4Mjk4NjI4LCJleHAiOjE3Mzg2NjY2Mjh9.ffNhPcUdonJKxq8unRqKCK26W5JlmCgpLNmrTTOUQRn3wjKYt7Rf7DKP247MgpB_D-3H_j_-YcP02Ro2yXlXbw";-->
-
-<!--  function fetchClients() {-->
-<!--    fetch(`${baseURL}/organization/b2b-list`, {-->
-<!--      headers: { "Authorization": `Bearer ${token}` }-->
-<!--    })-->
-<!--            .then(res => res.json())-->
-<!--            .then(data => {-->
-<!--              const table = document.getElementById("clientTable");-->
-<!--              table.innerHTML = "";-->
-<!--              data.result.forEach((client, index) => {-->
-<!--                table.innerHTML += `-->
-<!--                        <tr class="border-b">-->
-<!--                            <td class="py-2 px-4">${index + 1}</td>-->
-<!--                            <td class="py-2 px-4">${client.name}</td>-->
-<!--                            <td class="py-2 px-4">${client.phone}</td>-->
-<!--                            <td class="py-2 px-4">${client.address}</td>-->
-<!--                            <td class="py-2 px-4">-->
-<!--                                <button class="bg-yellow-500 text-white px-3 py-1 rounded" onclick="editClient(${client.id}, '${client.name}', '${client.phone}', '${client.address}')">Edit</button>-->
-<!--                                <button class="bg-red-500 text-white px-3 py-1 rounded ml-2" onclick="confirmDelete(${client.id})">Delete</button>-->
-<!--                            </td>-->
-<!--                        </tr>`;-->
-<!--              });-->
-<!--            });-->
-<!--  }-->
-
-<!--  function submitClient() {-->
-<!--    const id = document.getElementById("clientId").value;-->
-<!--    const method = id ? "PATCH" : "POST";-->
-<!--    const url = id ? `${baseURL}/organization/b2b-client/${id}` : `${baseURL}/organization/b2b-client`;-->
-<!--    const body = {-->
-<!--      name: document.getElementById("name").value,-->
-<!--      phone: document.getElementById("phone").value,-->
-<!--      address: document.getElementById("address").value,-->
-<!--    };-->
-
-<!--    fetch(url, {-->
-<!--      method,-->
-<!--      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },-->
-<!--      body: JSON.stringify(body)-->
-<!--    }).then(() => {-->
-<!--      closeModal("addModal");-->
-<!--      fetchClients();-->
-<!--    });-->
-<!--  }-->
-
-<!--  function editClient(id, name, phone, address) {-->
-<!--    document.getElementById("modalTitle").textContent = "Edit Client";-->
-<!--    document.getElementById("clientId").value = id;-->
-<!--    document.getElementById("name").value = name;-->
-<!--    document.getElementById("phone").value = phone;-->
-<!--    document.getElementById("address").value = address;-->
-<!--    openModal("addModal");-->
-<!--  }-->
-
-<!--  function confirmDelete(id) {-->
-<!--    document.getElementById("deleteClientId").value = id;-->
-<!--    openModal("deleteModal");-->
-<!--  }-->
-
-<!--  function deleteClient() {-->
-<!--    const id = document.getElementById("deleteClientId").value;-->
-<!--    fetch(`${baseURL}/organization/b2b-client/${id}`, {-->
-<!--      method: "DELETE",-->
-<!--      headers: { "Authorization": `Bearer ${token}` }-->
-<!--    }).then(() => {-->
-<!--      closeModal("deleteModal");-->
-<!--      fetchClients();-->
-<!--    });-->
-<!--  }-->
-
-<!--  function openModal(id) { document.getElementById(id).classList.remove("hidden"); }-->
-<!--  function closeModal(id) { document.getElementById(id).classList.add("hidden"); }-->
-
-<!--  fetchClients();-->
-<!--</script>-->
-<!--</body>-->
-<!--</html>-->
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>B2B Client Management</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="p-6 bg-gray-100">
 <div class="bg-white p-6 rounded shadow">
   <div class="flex justify-between mb-4">
-    <h2 class="text-xl font-bold">B2B Clients</h2>
-    <button onclick="openAddModal()" class="bg-blue-500 text-white px-4 py-2 rounded">Add Client</button>
+    <h2 class="text-xl font-bold text-blue-500">B2B Clients</h2>
+    <button onclick="openAddModal()" class="bg-blue-500 text-white px-4 py-2 rounded-md">Add Client</button>
   </div>
   <table class="w-full border-collapse border border-gray-300">
     <thead>
@@ -168,8 +29,10 @@
 <div id="addModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center ">
   <div class="bg-white p-6 rounded shadow w-96">
     <h2 class="text-lg font-bold mb-4">Add Client</h2>
+
     <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
     <input id="name" type="text" placeholder="Name" class="w-full border p-2 mb-2">
+
     <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
     <input id="phone" type="text" placeholder="Phone" class="w-full border p-2 mb-2">
     <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
@@ -212,7 +75,9 @@
     const response = await fetch(`${baseURL}/organization/b2b-list`, {
       headers: { Authorization: `Bearer ${accessToken}` }
     });
+
     const data = await response.json();
+    console.log('data ',data)
     const table = document.getElementById("clientTable");
     table.innerHTML = data.result.map(client => `
       <tr>
@@ -242,12 +107,23 @@
       alert("All fields are required!");
       return;
     }
+//fetch ===> 1.API end point 2.Method,headers,body
+   const res= await fetch(`${baseURL}/organization/b2b-client`,{
+     method: "POST",
+     headers: { "Content-Type": "application/json", Authorization: `Bearer ${accessToken}` },
+     body: JSON.stringify({ name, phone, address })
+   });
+    console.log('response',res)
+    const data = await res.json();
+    if(data?.status==201){
+      alert(`${data?.result?.name} B2B Client Created Successfully!`)
+    }else{
+      alert(`${data?.message}`)
+    }
+    console.log('res data',data)
 
-    await fetch(`${baseURL}/organization/b2b-client`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${accessToken}` },
-      body: JSON.stringify({ name, phone, address })
-    });
+
+
 
     closeAddModal();
     fetchClients();
@@ -273,11 +149,18 @@
       return;
     }
 
-    await fetch(`${baseURL}/organization/b2b-client/${editClientId}`, {
+   const res= await fetch(`${baseURL}/organization/b2b-client/${editClientId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${accessToken}` },
       body: JSON.stringify({ name, phone, address, status })
     });
+    if(res?.status==200){
+      alert('B2B Client Data updated successfully!')
+    }else{
+      alert('Something went wrong!')
+    }
+
+    console.log('edit response',res)
 
     closeEditModal();
     fetchClients();
